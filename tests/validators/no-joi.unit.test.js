@@ -27,6 +27,14 @@ describe('validators fallback when joi is missing', () => {
       }
       return origLoad.apply(this, arguments);
     };
+    // Remove any cached joi module so require will call Module._load and
+    // trigger the simulated missing-module error even if joi is installed.
+    try {
+      const rid = require.resolve('joi');
+      delete require.cache[rid];
+    } catch (e) {
+      // ignore if joi isn't installed
+    }
     jest.resetModules();
   });
 
