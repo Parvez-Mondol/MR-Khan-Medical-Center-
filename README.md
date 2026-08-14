@@ -1,9 +1,23 @@
 # MR. Khan Medical Center — Backend
 
 ## Setup
-1. `npm install`
-2. Copy `.env.example` to `.env` and fill in your MongoDB Atlas URI + JWT secrets
-3. `npm run dev` (requires nodemon; `npm start` works without it)
+1. `npm ci` (or `npm install`)
+2. Copy `.env.example` to `.env` and fill in values (see `.env.example`)
+3. Run a local MongoDB for development (one of the options below)
+4. `npm run dev` (requires `nodemon`); `npm start` runs in production mode
+
+Local Mongo options:
+
+- Docker Compose (recommended):
+
+```powershell
+docker compose up -d
+# then ensure MONGO_URI in .env is: mongodb://localhost:27017/khan_medical_center
+```
+
+- Install MongoDB locally and run it on port `27017`, then set `MONGO_URI` accordingly.
+
+If you prefer not to run a DB, the server will still start but routes requiring the DB will error until `MONGO_URI` is correct.
 
 ## Structure
 - `config/db.js` — MongoDB connection
