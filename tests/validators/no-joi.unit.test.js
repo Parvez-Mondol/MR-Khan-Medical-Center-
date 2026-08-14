@@ -35,6 +35,15 @@ describe('validators fallback when joi is missing', () => {
     } catch (e) {
       // ignore if joi isn't installed
     }
+    // Also remove any cached modules under a joi node_modules path to be thorough
+    try {
+      const keys = Object.keys(require.cache);
+      for (const k of keys) {
+        if (k.includes(path.sep + 'node_modules' + path.sep + 'joi')) {
+          delete require.cache[k];
+        }
+      }
+    } catch (e) {}
     jest.resetModules();
   });
 
