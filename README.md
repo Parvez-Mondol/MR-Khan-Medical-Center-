@@ -59,6 +59,24 @@ Notes:
 - CI workflow runs unit tests and a separate `integration` job with `RUN_INTEGRATION=true` and enforces coverage thresholds.
 - If you see slow runs due to MongoDB binary downloads, rerun with the environment variable omitted or enable caching in CI.
 
+Full-stack development (one command)
+
+Use the development compose override to bring up Mongo + the app (the app container will install dev deps and run `npm run dev`):
+
+```powershell
+# Windows PowerShell
+.\scripts\dev-up.ps1
+
+# Unix / WSL
+./scripts/dev-up.sh
+```
+
+Or run directly:
+
+```powershell
+docker compose up --build
+```
+
 ## Pull Request / CI notes
 
 - Branch: I pushed the changes to `ci-tests-coverage` which contains new tests, coverage config, and CI workflow files.
