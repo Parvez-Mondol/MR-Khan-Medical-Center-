@@ -2,7 +2,7 @@
 
 All notable changes for this branch are documented here. This file is a brief summary intended for reviewers.
 
-## Unreleased (ci-tests-coverage)
+## [1.0.0] - 2026-08-14
 
 - Add comprehensive unit tests across controllers and validators.
 - Add Jest coverage collection and CI-style `test:ci` script.
@@ -11,6 +11,10 @@ All notable changes for this branch are documented here. This file is a brief su
 - Add validation middleware and error handler improvements.
 - Add `.gitignore`, PR and issue templates, and `CONTRIBUTING.md`.
 - Improve tests to be opt-in for `mongodb-memory-server` via `RUN_INTEGRATION=true`.
+
+## Unreleased (ci-tests-coverage)
+
+No unreleased changes.
 
 ## How to verify
 
