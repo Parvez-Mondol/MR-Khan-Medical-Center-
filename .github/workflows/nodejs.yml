@@ -35,8 +35,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run integration tests (mongodb-memory-server)
-        run: npm run test:ci
+        run: |
+          # Run tests, capture output and preserve exit code
+          npm run test:ci 2>&1 | tee test-output.txt
+          test_exit=${PIPESTATUS[0]}
+          echo "TEST_EXIT=$test_exit" > test-exit.txt
+          exit $test_exit
         env:
           CI: true
           RUN_INTEGRATION: true
           ENFORCE_COVERAGE: true
+
+      - name: Upload test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-output
+          path: |
+            test-output.txt
+            test-exit.txt
+            coverage/**
+            coverage/lcov.info
