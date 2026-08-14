@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
+    "dev:stack": "node ./scripts/dev-stack-runner.js",
     "start": "node server.js",
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage",
