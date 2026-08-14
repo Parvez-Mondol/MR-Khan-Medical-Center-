@@ -74,7 +74,21 @@ beforeAll(async () => {
 afterAll(async () => {
   if (canRun) {
     await mongoose.disconnect();
-    if (mongod) await mongod.stop();
+    if (mongod) {
+      try {
+        await mongod.stop();
+      } catch (e) {
+        console.warn('Warning: mongod.stop() failed during cleanup:', e && e.message ? e.message : e);
+        try {
+          // Best-effort: attempt to kill the process if present (non-fatal)
+          if (mongod.instanceInfo && mongod.instanceInfo.pid) {
+            process.kill(mongod.instanceInfo.pid);
+          }
+        } catch (killErr) {
+          // ignore
+        }
+      }
+    }
   }
 });
 
