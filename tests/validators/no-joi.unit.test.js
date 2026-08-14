@@ -1,14 +1,8 @@
 const Module = require('module');
 
-const JoiAvailable = (() => { try { require.resolve('joi'); return true; } catch { return false; } })();
-
 describe('validators fallback when joi is missing', () => {
-  if (JoiAvailable) {
-    test('joi is installed — skip missing-joi fallback tests', () => {
-      expect(true).toBe(true);
-    });
-    return;
-  }
+  // Always simulate `joi` missing by intercepting Module._load below so
+  // we exercise the fallback permissive schemas and improve coverage.
   let origLoad;
 
   beforeAll(() => {
