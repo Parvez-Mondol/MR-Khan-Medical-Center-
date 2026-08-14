@@ -44,3 +44,17 @@ ENFORCE_COVERAGE=true npm run test:ci
 Notes:
 - CI workflow runs unit tests and a separate `integration` job with `RUN_INTEGRATION=true` and enforces coverage thresholds.
 - If you see slow runs due to MongoDB binary downloads, rerun with the environment variable omitted or enable caching in CI.
+
+## Pull Request / CI notes
+
+- Branch: I pushed the changes to `ci-tests-coverage` which contains new tests, coverage config, and CI workflow files.
+- How to open PR: visit the compare page and paste the PR body from `pr-body.md` (created in the repo root):
+
+    https://github.com/Parvez-Mondol/MR-Khan-Medical-Center-/compare/main...ci-tests-coverage?expand=1
+
+- CI expectations:
+    - The `test` job runs unit tests and reports coverage.
+    - The `integration` job runs only when `RUN_INTEGRATION=true` and will download a MongoDB binary; this is opt-in to avoid slow default CI.
+    - Coverage is enforced in CI; if a job fails due to coverage, run `npm run test:ci` locally and inspect the uncovered files listed in the report.
+
+If you want, I can attempt to create the PR automatically from this environment when `gh` (GitHub CLI) is installed and authenticated — otherwise please create the PR from the compare URL above and paste the `pr-body.md` contents as the description.
